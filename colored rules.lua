@@ -123,20 +123,28 @@ function writerules(parent,name,x_,y_)
 							local target = cond[1]
 							local isnot = string.sub(target, 1, 4)
 							local target_ = target
+							local coloured_target = target
+							local coloured_isnot = ""
 							
 							if (isnot == "not ") then
 								target_ = string.sub(target, 5)
+
+								coloured_isnot = getColorByObjectName("not") .. "not "
 							else
 								isnot = ""
 							end
 							
 							if (word_names[target_] ~= nil) then
 								target = isnot .. word_names[target_]
+
+								coloured_target = coloured_isnot .. getColorByObjectName(word_names[target_]) .. word_names[target_]
+							else
+								coloured_target = coloured_isnot .. getColorByObjectName(target_) .. target_
 							end
 							
 							text = text .. target .. " "
 
-							coloured_text = "$0,3" .. coloured_text .. getColorByObjectName(target) .. target .. " "
+							coloured_text = "$0,3" .. coloured_text .. coloured_target .. " "
 						else
 							text = text .. custom .. " "
 
@@ -150,20 +158,28 @@ function writerules(parent,name,x_,y_)
 										local target = d
 										local isnot = string.sub(target, 1, 4)
 										local target_ = target
+										local coloured_target = target
+										local coloured_isnot = ""
 										
 										if (isnot == "not ") then
 											target_ = string.sub(target, 5)
+
+											coloured_isnot = getColorByObjectName("not") .. "not "
 										else
 											isnot = ""
 										end
 										
 										if (word_names[target_] ~= nil) then
 											target = isnot .. word_names[target_]
+
+											coloured_target = coloured_isnot .. getColorByObjectName(word_names[target_]) .. word_names[target_]
+										else
+											coloured_target = coloured_isnot .. getColorByObjectName(target_) .. target_
 										end
 										
 										text = text .. target .. " "
 
-										coloured_text = "$0,3" .. coloured_text .. getColorByObjectName(target) .. target .. " "
+										coloured_text = "$0,3" .. coloured_text .. coloured_target .. " "
 									else
 										text = text .. custom .. " "
 
@@ -201,22 +217,30 @@ function writerules(parent,name,x_,y_)
 			local target = rule[3]
 			local isnot = string.sub(target, 1, 4)
 			local target_ = target
+			local coloured_target = target
+			local coloured_isnot = ""
 			
 			if (isnot == "not ") then
 				target_ = string.sub(target, 5)
 				isnot = isnot
+
+				coloured_isnot = getColorByObjectName("not") .. "not "
 			else
 				isnot = ""
 			end
 			
 			if (word_names[target_] ~= nil) then
 				target = isnot .. word_names[target_]
+
+				coloured_target = coloured_isnot .. getColorByObjectName(word_names[target_]) .. word_names[target_]
+			else
+				coloured_target = coloured_isnot .. getColorByObjectName(target_) .. target_
 			end
 			
 			if (#custom == 0) then
 				text = text .. rule[2] .. " " .. target
 
-				coloured_text = "$0,3" .. coloured_text .. getColorByObjectName(rule[2]) .. rule[2] .. "$0,3 " .. getColorByObjectName(target) .. target
+				coloured_text = "$0,3" .. coloured_text .. getColorByObjectName(rule[2]) .. rule[2] .. "$0,3 " .. getColorByObjectName(coloured_target) .. coloured_target
 			else
 				text = text .. custom .. " " .. custom
 
